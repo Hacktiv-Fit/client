@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- CSS Local -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+    <!--Fontawesome CDN-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    
+    <!-- Google Sign In -->
+    <meta name="google-signin-client_id" content="818771928668-tuk368d6s823e6971pqd7bssfp7ufjuu.apps.googleusercontent.com">
+    <title>Hacktiv-Fit</title>
+  </head>
+  <body>
+    <!-- Login-->
+    <section id="landingPage">
+    <div class="wrapper fadeInDown">
+      <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first pt-5">
+          <span><i class="fas fa-user fa-3x"></i></span>
+          <h5>Sign In</h5>
+        </div>
+        <div class="container my-3">
+          <form id="signIn">
+            <input type="email" id="email-login" class="fadeIn second" name="login" placeholder="email" required>
+            <input type="password" id="password-login" class="fadeIn third" name="login" placeholder="password" required>
+            <input type="submit" class="fadeIn fourth" value="Sign In">
+          </form>
+          <span>Or Login With</span>
+          <div class="g-signin2" data-onsuccess="onSignIn"></div>
+          <button onclick="signOut()" id="SignOut">Sign Out</button>
+        </div>
+        <!-- Login Form -->
+        <div id="formFooter">
+          <small>Don't Have any accout ? Sign Up Here</small><br>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal register-->
+      <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="modal-title" id="registerModalLabel">Sign Up</h5>
+            </div>
+            <div class="modal-body text-center">
+              <form id="signUp">
+                <input type="text" id="name-register" class="fadeIn first" name="login" placeholder="name" required>
+                <input type="email" id="email-register" class="fadeIn second" name="login" placeholder="email" required>
+                <input type="password" id="password-register" class="fadeIn third" name="login" placeholder="password" required>
+                <input type="submit" class="fadeIn fourth" value="Sign Up">
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Optional JavaScript -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+    <!-- SWAL cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
