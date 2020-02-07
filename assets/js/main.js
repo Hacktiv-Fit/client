@@ -1,3 +1,65 @@
+
+function nutritionixInputShow () {
+    $('#nutritionix-input').show()
+}
+
+function nutritionixInput() {
+    const token = localStorage.token
+    const query = $('#nQuery').val()
+    const gender = $('#nGender').val()
+    const weight_kg = $('#nWeight').val()
+    const height_cm = $('#nHeight').val()
+    const age = $('#nAge').val()
+    console.log(query, gender, weight_kg, height_cm, age, 'INPUT =========')
+    $.ajax('http://localhost:3000/nutritionix/excercise', {
+        method: 'POST',
+        headers: { token },
+        data: { query, gender, weight_kg, height_cm, age }
+    })
+    .done(({ data }) => {
+        console.log(data)
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
+
+function nutritionix() {
+    $('#nutritionix-input').on("submit", (e) => {
+        e.preventDefault()
+    const token = localStorage.token
+    const query = $('#nQuery').val()
+    const gender = $('input[name=gender]:checked', '#nutritionix-input').val()
+    const weight_kg = $('#nWeight').val()
+    const height_cm = $('#nHeight').val()
+    const age = $('#nAge').val()
+    console.log(query, gender, weight_kg, height_cm, age, 'INPUT =========')
+    $.ajax('http://localhost:3000/nutritionix/excercise', {
+        method: 'POST',
+        headers: { token },
+        data: { query, gender, weight_kg, height_cm, age }
+    })
+    .done( data => {
+        console.log(data[0].nf_calories)
+        $('#nutritionix-calories-output').empty()
+        $('#nutritionix-type-output').empty()
+        $('#nutritionix-calories-output').append(`
+        <h5 id="calories" class="card-title">${data[0].nf_calories}</h5>
+        `)
+        $('#nutritionix-type-output').append(`
+        <h5 id="calories" class="card-title">${data[0].name}</h5>
+        `)
+        $('#nWeight').val('')
+        $('#nHeight').val('')
+        $('#nQuery').val('')
+        $('#nAge').val('')
+    })
+    .fail(err => {
+        console.log(err)
+    })
+    })
+}
+
 let currentUser = localStorage.currentUser
 // USER QUERY
 function onSignIn(googleUser) {
@@ -480,6 +542,10 @@ $(document).ready(() => {
   // } else {
   //   landingPage()
   // }
+
+//   nutritionix
+nutritionix()
+nutritionixInput()
 
   signOut()
   signInProject()
