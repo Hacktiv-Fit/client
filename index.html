@@ -71,6 +71,38 @@
         </div>
       </div>
     </section>
+    <section id="nutritionix">
+        <div class="container">'
+            <center>
+                <div class="nutritionix">
+                    <form id="nutritionix-input">
+                        <input id="nQuery" type="text" placeholder="Excercise" style="max-width: 30rem;" required><br>
+                        <label>Gender</label><br>
+                        <input type="radio" name="gender" value="Male"> Male <br>
+                        <input type="radio" name="gender" value="Female"> Female <br><br>
+                        <input id="nWeight" type="number" placeholder="Weight" style="max-width: 7rem;" required>
+                        <input id="nHeight" type="number" placeholder="Height" style="max-width: 7rem;" required>    
+                        <input id="nAge" type="number" placeholder="Age" style="max-width: 7rem;" required><br>
+                        <input type="submit" class="mt-5" value="Submit" style="background-color:whitesmoke; color: steelblue;">
+                    </form>
+                </div>
+                <div>
+                    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Calories Burned</div>
+                        <div id="nutritionix-calories-output" class="card-body text-primary">
+                          
+                        </div>
+                    </div>
+                    <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-header">Excercise Type</div>
+                        <div id="nutritionix-type-output" class="card-body text-primary">
+                          
+                        </div>
+                    </div>
+                </div>
+            </center>
+        </div>
+    </section>
     <!-- Optional JavaScript -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
