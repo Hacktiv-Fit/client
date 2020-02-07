@@ -172,16 +172,17 @@ function signOut() {
 }
 
 function sportsChoice() {
+  $('#teamDiv').empty()
   $('#teamDiv').hide()
   $('#sportCountry').hide()
   $('#sportChoice').append(`
     <div class="card-body" >
         <br>
-        <a id="footballCheck"><img src="https://clipartstation.com/wp-content/uploads/2018/10/soccer-ball-clipart-png.jpg" style="width:150px"></i></i></a>
+        <a id="footballCheck"><img src="https://pluspng.com/img-png/fifa-logo-png-fifa-logo-png-1500.png" style="width:150px"></i></i></a>
         <br><br>
-        <a id="basketballCheck"><img src="https://banner2.cleanpng.com/20171128/d31/football-ball-png-clip-art-image-5a1cedaa128e70.077507621511845290076.jpg" style="width:150px"></i></a>
+        <a id="basketballCheck"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/47/International_Basketball_Federation_logo.svg/1200px-International_Basketball_Federation_logo.svg.png" style="width:150px"></i></a>
         <br><br>
-        <a id="americanFootballCheck"><img src="fas fa-football-ball style="width:150px""></i></a>
+        <a id="americanFootballCheck"><img src="https://seeklogo.com/images/I/international-federation-of-american-football-ifaf-logo-5088DFDCEF-seeklogo.com.png" style="width:150px"></i></a>
         <br>
     </div>
     <br>
@@ -491,7 +492,7 @@ function showTeam(teams){
   console.log(teams)
   $('#teamDiv').show()
   $('#teamLogo').show()
-  teams.forEach(data => {
+  teams.forEach((data) => {
       $('#listItem').append(`
         <tr>
           <td><a id="teamName${data.strTeam}"><img src="${data.strTeamBadge}" style="width:50px"></a></td>
