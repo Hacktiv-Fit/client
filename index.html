@@ -16,9 +16,27 @@
     
     <!-- Google Sign In -->
     <meta name="google-signin-client_id" content="818771928668-tuk368d6s823e6971pqd7bssfp7ufjuu.apps.googleusercontent.com">
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="./assets/image/favicion.png" type="image/x-icon">
     <title>Hacktiv-Fit</title>
   </head>
   <body>
+    <section id="navbar">
+      <nav class="navbar navbar-expand-sm navbar-primary bg-white fixed-top border-bottom">
+        <a class="navbar-brand" href="">Hacktiv-Fit</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav row ml-auto text-dark">
+            <div id="currentUser"></div>
+            <div class="col" id="SignOut" style="cursor: pointer;">Logout</div>
+          </div>
+        </div>
+      </nav>
+    </section>
+    
     <!-- Login-->
     <section id="landingPage">
     <div class="wrapper fadeInDown">
@@ -37,7 +55,7 @@
           </form>
           <span>Or Login With</span>
           <div class="g-signin2" data-onsuccess="onSignIn"></div>
-          <button onclick="signOut()" id="SignOut">Sign Out</button>
+          <!-- <button onclick="signOut()" id="SignOut">Sign Out</button> -->
         </div>
         <!-- Login Form -->
         <div id="formFooter">
@@ -72,13 +90,47 @@
       </div>
     </section>
 
-    <!-- Wger Meal -->
-    <div id="wger-meal-container">
-      <div>
-        <div class="card container-fluid">
-          <div class="card-header">
-            Nutrion Meal Manager
+    <section id="nutritionix">
+      <div class="container mt-5">'
+        <center>
+          <h3>Excercise Manager</h3>
+          <div class="nutritionix">
+            <form id="nutritionix-input">
+              <input id="nQuery" type="text" placeholder="Excercise" style="max-width: 30rem;" required><br>
+              <label>Gender</label><br>
+              <div class="form-group text-left" style="width: 12%;">
+                <input type="radio" name="gender" value="Male"> Male <br>
+                <input type="radio" name="gender" value="Female"> Female <br>
+              </div>
+              <input id="nWeight" type="number" placeholder="Weight" style="max-width: 7rem;" required>
+              <input id="nHeight" type="number" placeholder="Height" style="max-width: 7rem;" required>    
+              <input id="nAge" type="number" placeholder="Age" style="max-width: 7rem;" required><br>
+              <input type="submit" class="mt-3" value="Submit" style="background-color:whitesmoke; color: steelblue;">
+            </form>
           </div>
+            <div>
+              <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Calories Burned</div>
+                  <div id="nutritionix-calories-output" class="card-body text-primary">
+                    
+                  </div>
+              </div>
+              <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Excercise Type</div>
+                <div id="nutritionix-type-output" class="card-body text-primary">
+                  
+                </div>
+              </div>
+            </div>
+        </center>
+      </div>
+    </section>
+
+    <!-- Wger Meal -->
+    <section id="wger-meal-container">
+      <div class="container my-5">
+        <h3 class="text-center">Meal Manager</h3>
+        <div class="card container-fluid">
           <div class="card-body">
             <h5 class="card-title">Your Meal list</h5>
             <p class="card-text">Plan your meal by adding an ingredient or more, and learn how much nutritions you might consume.</p>
@@ -89,13 +141,13 @@
             <div id="meal-list" class="table-responsive">
               <table class="table table-hover">
                 <thead>
-                  <tr>
-                    <th scope="col">#</th>
+                  <tr class="text-center">
+                    <th scope="col">No.</th>
                     <th scope="col">Contents</th>
-                    <th scope="col">Energy (kcal)</th>
-                    <th scope="col">Carbohydrates (% from energy)</th>
-                    <th scope="col">Protein (% from energy)</th>
-                    <th scope="col">Fat (% from energy)</th>
+                    <th scope="col">Energy <br>(kcal)</th>
+                    <th scope="col">Carbohydrates <br>(% from energy)</th>
+                    <th scope="col">Protein <br>(% from energy)</th>
+                    <th scope="col">Fat <br>(% from energy)</th>
                     <th scope="col">Actions</th>
                   </tr>
                 </thead>
@@ -183,59 +235,28 @@
           </div>
         </div>
       </div>
-    </div>
+    </section>
     <!-- SportsDb -->
     <section id="sportsDbPage">
-      <div class="container">
+      <div class="container mt-5">
+        <h3 class="text-center">Sports Feed</h3>
         <div class="row">
-          <div class="col-sm-3">
+          <div class="col-md-4">
             <div class="card card-signup z-depth-0 bg-light text-center" id="sportChoice">
             </div>
           </div>
-          <div class="col-sm-2">
+          <div class="col-md-3 scroll">
             <div class="card card-signup z-depth-0 bg-light text-center" id="sportCountry">
             </div>
           </div>
-          <div class="col-sm-7" id="teamDiv">
+          <div class="col-md-5" id="teamDiv">
             <div class="container" id="teamDiv"></div>
           </div>
         </div>
       </div>
     </section>
+    <!-- Nutritionix -->
 
-    <section id="nutritionix">
-        <div class="container">'
-            <center>
-                <div class="nutritionix">
-                    <form id="nutritionix-input">
-                        <input id="nQuery" type="text" placeholder="Excercise" style="max-width: 30rem;" required><br>
-                        <label>Gender</label><br>
-                        <input type="radio" name="gender" value="Male"> Male <br>
-                        <input type="radio" name="gender" value="Female"> Female <br><br>
-                        <input id="nWeight" type="number" placeholder="Weight" style="max-width: 7rem;" required>
-                        <input id="nHeight" type="number" placeholder="Height" style="max-width: 7rem;" required>    
-                        <input id="nAge" type="number" placeholder="Age" style="max-width: 7rem;" required><br>
-                        <input type="submit" class="mt-5" value="Submit" style="background-color:whitesmoke; color: steelblue;">
-                    </form>
-                </div>
-                <div>
-                    <div class="card border-secondary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Calories Burned</div>
-                        <div id="nutritionix-calories-output" class="card-body text-primary">
-                          
-                        </div>
-                    </div>
-                    <div class="card border-secondary mb-3" style="max-width: 18rem;">
-                        <div class="card-header">Excercise Type</div>
-                        <div id="nutritionix-type-output" class="card-body text-primary">
-                          
-                        </div>
-                    </div>
-                </div>
-            </center>
-
-        </div>
-    </section>
     <!-- Optional JavaScript -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

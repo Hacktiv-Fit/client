@@ -1,65 +1,3 @@
-
-function nutritionixInputShow () {
-    $('#nutritionix-input').show()
-}
-
-function nutritionixInput() {
-    const token = localStorage.token
-    const query = $('#nQuery').val()
-    const gender = $('#nGender').val()
-    const weight_kg = $('#nWeight').val()
-    const height_cm = $('#nHeight').val()
-    const age = $('#nAge').val()
-    console.log(query, gender, weight_kg, height_cm, age, 'INPUT =========')
-    $.ajax('http://localhost:3000/nutritionix/excercise', {
-        method: 'POST',
-        headers: { token },
-        data: { query, gender, weight_kg, height_cm, age }
-    })
-    .done(({ data }) => {
-        console.log(data)
-    })
-    .fail(err => {
-        console.log(err)
-    })
-}
-
-function nutritionix() {
-    $('#nutritionix-input').on("submit", (e) => {
-        e.preventDefault()
-    const token = localStorage.token
-    const query = $('#nQuery').val()
-    const gender = $('input[name=gender]:checked', '#nutritionix-input').val()
-    const weight_kg = $('#nWeight').val()
-    const height_cm = $('#nHeight').val()
-    const age = $('#nAge').val()
-    console.log(query, gender, weight_kg, height_cm, age, 'INPUT =========')
-    $.ajax('http://localhost:3000/nutritionix/excercise', {
-        method: 'POST',
-        headers: { token },
-        data: { query, gender, weight_kg, height_cm, age }
-    })
-    .done( data => {
-        console.log(data[0].nf_calories)
-        $('#nutritionix-calories-output').empty()
-        $('#nutritionix-type-output').empty()
-        $('#nutritionix-calories-output').append(`
-        <h5 id="calories" class="card-title">${data[0].nf_calories}</h5>
-        `)
-        $('#nutritionix-type-output').append(`
-        <h5 id="calories" class="card-title">${data[0].name}</h5>
-        `)
-        $('#nWeight').val('')
-        $('#nHeight').val('')
-        $('#nQuery').val('')
-        $('#nAge').val('')
-    })
-    .fail(err => {
-        console.log(err)
-    })
-    })
-}
-
 let currentUser = localStorage.currentUser
 // USER QUERY
 function onSignIn(googleUser) {
@@ -75,9 +13,15 @@ function onSignIn(googleUser) {
     localStorage.token = data.token
     localStorage.currentUser = data.name
     currentUser = data.name
+    contentPage()
   })
   .fail( err => {
-    console.log(err)
+      Swal.fire({
+        title: 'Error!',
+        text: `Email / Password Wrong !`,
+        icon: 'error',
+        confirmButtonText: 'Try Again !'
+      })
   })
 }
 
@@ -104,6 +48,7 @@ function signInProject () {
         icon: 'success',
         confirmButtonText: 'Cool !'
       })
+      contentPage()
     })
     .fail(() => {
       Swal.fire({
@@ -141,6 +86,7 @@ function signUpProject () {
         icon: 'success',
         confirmButtonText: 'Cool !'
       })
+      $('#registerModal').modal('hide')
     })
     .fail( err => {
       Swal.fire({
@@ -157,6 +103,7 @@ function signOutProject () {
   $('#SignOut').on('click', () => {
     localStorage.clear()
     currentUser = ''
+    landingPage()
   })
 }
 
@@ -164,13 +111,102 @@ function signOut() {
   $('#SignOut').on('click', function() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
-      console.log('User signed out.');
+      // console.log('User signed out.');
       localStorage.clear()
       currentUser = ''
+      landingPage()
     })
   })
 }
 
+
+function nutritionixInputShow () {
+    $('#nutritionix-input').show()
+}
+
+function nutritionixInput() {
+    const token = localStorage.token
+    const query = $('#nQuery').val()
+    const gender = $('#nGender').val()
+    const weight_kg = $('#nWeight').val()
+    const height_cm = $('#nHeight').val()
+    const age = $('#nAge').val()
+    // console.log(query, gender, weight_kg, height_cm, age, 'INPUT =========')
+    $.ajax('http://localhost:3000/nutritionix/excercise', {
+        method: 'POST',
+        headers: { token },
+        data: { query, gender, weight_kg, height_cm, age }
+    })
+    .done(({ data }) => {
+        // console.log(data)
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
+
+function nutritionix() {
+    $('#nutritionix-input').on("submit", (e) => {
+        e.preventDefault()
+    const token = localStorage.token
+    const query = $('#nQuery').val()
+    const gender = $('input[name=gender]:checked', '#nutritionix-input').val()
+    const weight_kg = $('#nWeight').val()
+    const height_cm = $('#nHeight').val()
+    const age = $('#nAge').val()
+    // console.log(query, gender, weight_kg, height_cm, age, 'INPUT =========')
+    $.ajax('http://localhost:3000/nutritionix/excercise', {
+        method: 'POST',
+        headers: { token },
+        data: { query, gender, weight_kg, height_cm, age }
+    })
+    .done( data => {
+        // console.log(data[0].nf_calories)
+        $('#nutritionix-calories-output').empty()
+        $('#nutritionix-type-output').empty()
+        $('#nutritionix-calories-output').append(`
+        <h5 id="calories" class="card-title">${data[0].nf_calories}</h5>
+        `)
+        $('#nutritionix-type-output').append(`
+        <h5 id="calories" class="card-title">${data[0].name}</h5>
+        `)
+        $('#nWeight').val('')
+        $('#nHeight').val('')
+        $('#nQuery').val('')
+        $('#nAge').val('')
+    })
+    .fail(err => {
+      Swal.fire({
+        title: 'Error!',
+        text: `${err.responseJSON.msg}`,
+        icon: 'error',
+        confirmButtonText: 'Try Again !'
+      })
+    })
+    })
+}
+
+function landingPage() {
+  $('#landingPage').show()
+  $('#navbar').hide()
+  $('#wger-meal-container').hide()
+  $('#sportsDbPage').hide()
+  $('#nutritionix').hide()
+}
+
+function fetchName() {
+  $('#currentUser').empty()
+  $('#currentUser').append(`Hello ${currentUser}`)
+}
+
+function contentPage() {
+  fetchName()
+  $('#landingPage').hide()
+  $('#nutritionix').show()
+  $('#wger-meal-container').show()
+  $('#sportsDbPage').show()
+  $('#navbar').show()
+}
 
 function genUserMealData() {
   $.ajax({
@@ -182,7 +218,7 @@ function genUserMealData() {
     }
   })
     .done(data => {
-      console.log(data)
+      // console.log(data)
       if(data.length) {
         $('#no-list-message').hide()
         $('tbody#user-meal-listing').empty()
@@ -219,7 +255,7 @@ function genIngredientOptions() {
       })
     })
     .fail(err => {
-      console.log(err)
+      console.log(err,'aku disini')
     })
 }
 
@@ -237,7 +273,7 @@ function inputIngredientToUserMeal(name, amount) {
     }
   })
     .done(data => {
-      console.log(data)
+      // console.log(data)
       $('#ingredientModal').modal('hide')
       genUserMealData()
     })
@@ -454,7 +490,6 @@ function footballTeams(league, country){
       </table>
     </div>
   `)
-  console.log(country)
   $.ajax({
     url : 'http://localhost:3000/sportsDb/football',
     method : 'post',
@@ -538,7 +573,6 @@ function basketballTeams(league, country){
       </table>
     </div>
   `)
-  console.log(country)
   $.ajax({
     url : 'http://localhost:3000/sportsDb/basketball',
     method : 'post',
@@ -595,7 +629,6 @@ function americanFootballTeams(league, country){
       </table>
     </div>
   `)
-  console.log(country)
   $.ajax({
     url : 'http://localhost:3000/sportsDb/americanFootball',
     method : 'post',
@@ -622,7 +655,6 @@ function americanFootballTeams(league, country){
 }
 
 function showTeam(teams){
-  console.log(teams)
   $('#teamDiv').show()
   $('#teamLogo').show()
   teams.forEach((data) => {
@@ -671,19 +703,14 @@ function showTeam(teams){
 
 // DOCUMENT READY
 $(document).ready(() => {
-  // if(localStorage.getItem('token')) {
-  //   fetchName()
-  //   contentPage()
-  //   fetchTodo()
-  // } else {
-  //   landingPage()
-  // }
-
-  // ready for ingredient list option
-  genIngredientOptions()
-  // nutritionix
-  nutritionix()
-  nutritionixInput()
+  if(localStorage.token) {
+    fetchName()
+    contentPage()
+    genIngredientOptions()
+    nutritionix()
+  } else {
+    landingPage()
+  }
 
   signOut()
   signInProject()
@@ -691,11 +718,13 @@ $(document).ready(() => {
   signOutProject()
 
   genUserMealData()
+
   // submit new meal with first ingredient
   $('#new-ingredient-modal').on('click', () => {
     $('#amount-ingredient').val('')
   })
 
+  
   $('#insert-ingredient').on('submit', e => {
     e.preventDefault()
     let ingredient_name = $('#ingredient-list').val()
