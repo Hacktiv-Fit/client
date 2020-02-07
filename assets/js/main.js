@@ -109,6 +109,7 @@ function signOut() {
   })
 }
 
+
 // DOCUMENT READY
 $(document).ready(() => {
   // if(localStorage.getItem('token')) {
