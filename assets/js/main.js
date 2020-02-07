@@ -40,7 +40,7 @@ function nutritionix() {
         data: { query, gender, weight_kg, height_cm, age }
     })
     .done( data => {
-        console.log(data[0].nf_calories)
+        // console.log(data[0].nf_calories)
         $('#nutritionix-calories-output').empty()
         $('#nutritionix-type-output').empty()
         $('#nutritionix-calories-output').append(`
@@ -55,7 +55,12 @@ function nutritionix() {
         $('#nAge').val('')
     })
     .fail(err => {
-        console.log(err)
+      Swal.fire({
+        title: 'Error!',
+        text: `${err.responseJSON.msg}`,
+        icon: 'error',
+        confirmButtonText: 'Try Again !'
+      })
     })
     })
 }
@@ -75,9 +80,15 @@ function onSignIn(googleUser) {
     localStorage.token = data.token
     localStorage.currentUser = data.name
     currentUser = data.name
+    contentPage()
   })
   .fail( err => {
-    console.log(err)
+      Swal.fire({
+        title: 'Error!',
+        text: `Email / Password Wrong !`,
+        icon: 'error',
+        confirmButtonText: 'Try Again !'
+      })
   })
 }
 
@@ -104,6 +115,7 @@ function signInProject () {
         icon: 'success',
         confirmButtonText: 'Cool !'
       })
+      contentPage()
     })
     .fail(() => {
       Swal.fire({
@@ -141,6 +153,7 @@ function signUpProject () {
         icon: 'success',
         confirmButtonText: 'Cool !'
       })
+      $('#registerModal').modal('hide')
     })
     .fail( err => {
       Swal.fire({
@@ -157,6 +170,7 @@ function signOutProject () {
   $('#SignOut').on('click', () => {
     localStorage.clear()
     currentUser = ''
+    landingPage()
   })
 }
 
@@ -167,25 +181,43 @@ function signOut() {
       console.log('User signed out.');
       localStorage.clear()
       currentUser = ''
+      landingPage()
     })
   })
 }
 
+function landingPage() {
+  $('#landingPage').show()
+  $('#navbar').hide()
+  $('#nutritionix').hide()
+}
+
+function fetchName() {
+  $('#currentUser').empty()
+  $('#currentUser').append(`Hello ${currentUser}`)
+}
+
+function contentPage() {
+  fetchName()
+  $('#landingPage').hide()
+  $('#nutritionix').show()
+  $('#navbar').show()
+}
 
 // DOCUMENT READY
 $(document).ready(() => {
-  // if(localStorage.getItem('token')) {
-  //   fetchName()
-  //   contentPage()
-  //   fetchTodo()
-  // } else {
-  //   landingPage()
-  // }
+  if(localStorage.token) {
+    fetchName()
+    contentPage()
+  } else {
+    // hideNutritionix()
+    landingPage()
+  }
 
 //   nutritionix
-nutritionix()
-nutritionixInput()
-
+  nutritionix()
+  // nutritionixInput()
+  // showNutritionix()
   signOut()
   signInProject()
   signUpProject()
