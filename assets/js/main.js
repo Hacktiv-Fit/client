@@ -447,7 +447,7 @@ function footballTeams(league, country){
   $('#sportCountry').empty()
   $('#sportCountry').append(`
     <div class="card-body" id="teamLogo">
-      <table class="table text-center bg-light">
+      <table class="table text-center">
         <tbody id="listItem">
 
         </tbody>
@@ -626,13 +626,14 @@ function showTeam(teams){
   $('#teamDiv').show()
   $('#teamLogo').show()
   teams.forEach((data) => {
+    console.log(data.strTeam)
       $('#listItem').append(`
         <tr>
-          <td><a id="teamName${data.strTeam}"><img src="${data.strTeamBadge}" style="width:50px"></a></td>
+          <td><a id="teamName${data.idTeam}"><img src="${data.strTeamBadge}" style="width:50px"></a></td>
         </tr>
       `)
-      $(`#teamName${data.strTeam}`).on('click', (e) => {
-        console.log(e.target)
+      $(`#teamName${data.idTeam}`).on('click', (e) => {
+        console.log(data)
         $('#teamDiv').empty()
         $('#teamDiv').append(`
           <div class="card card-signup z-depth-0 text-center bg-light">
