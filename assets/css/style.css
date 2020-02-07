@@ -275,3 +275,12 @@ input[type=date]:placeholder {
 .g-signin2 > div{
   margin: 0 auto;
 }
+
+a{
+  cursor: pointer;
+}
+
+.scroll {
+  max-height: 100vh;
+  overflow-y: auto;
+}
